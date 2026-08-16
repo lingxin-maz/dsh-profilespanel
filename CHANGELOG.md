@@ -12,6 +12,12 @@
 - **市场→面板跳转（接收侧）**：`src/client/market-bridge.ts` 支持 `window` 自定义事件 `dsh-profile-panel:install-target`（`detail: { package, spec? }`）与 URL 深链 `#dshpp-install=<target>`；InstallSection 挂载时消费预填并自动预览。设置外壳是单页导航（每功能一页、无跨分区切换 API），故接收侧为「预填待消费」语义——市场侧按钮只需派发事件或设置 hash，即可把包名送进本插件下载模块（上游 dshmarket 接入点已预留）。
 - 双语文案、宿主单测（install/market/routes/registry/updates）与客户端测试（panel 市场搜索、深链/事件预填、bridge 解析）全部补齐。
 
+### 仓库发布准备（GitHub 仓库名 `dsh-profilespanel`）
+
+- 构建产物 `lib/` + `client/` 纳入版本库：`github:<owner>/dsh-profilespanel` 直装**无需在消费端构建**，装完即可运行（`prepare` 脚本仍保留作刷新路径）；
+- 新增 `.github/workflows/ci.yml`（push/PR 自动 typecheck + build + test）、`.gitattributes`（LF 归一）、完整 `.gitignore`；`package.json` 增加 `engines`（node ≥ 18）、`packageManager`（pnpm@11.7.0）；
+- README 重写：项目优势（与 dshmarket / 官方内置能力对比表）、三种安装方式（npm / GitHub / 本地）、安装后验证步骤、仓库运行必需内容清单。
+
 ### 修复（健康检查误报 · F6 peer-gap）
 
 - **宿主自带 peer 不再误报**：`@deepseek-ai/*` 由 harness 装载器从其自身模块表提供，文件系统扫描永远看不到——此类 peer（如 `@deepseek-ai/cordis`、`@deepseek-ai/schemastery`）不再被报告为「缺失」；
