@@ -1,4 +1,4 @@
-# dsh-plugins · DeepSeek Harness 插件集合
+# dsh-profilespanel · DeepSeek Harness 插件集合
 
 > 仓库名 `dsh-profilespanel` · 本仓库采用 **dsh-plugins 格式**：每个插件一个独立目录、根 README 提供安装指引（当前含 1 个插件）。
 >
