@@ -14,7 +14,7 @@
 
 ### 仓库发布准备（GitHub 仓库名 `dsh-profilespanel`）
 
-- 构建产物 `lib/` + `client/` 纳入版本库：`github:<owner>/dsh-profilespanel` 直装**无需在消费端构建**，装完即可运行（`prepare` 脚本仍保留作刷新路径）；
+- 构建产物 `lib/` + `client/` 纳入版本库：`github:lingxin-maz/dsh-profilespanel` 直装**无需在消费端构建**，装完即可运行（`prepare` 脚本仍保留作刷新路径）；
 - 新增 `.github/workflows/ci.yml`（push/PR 自动 typecheck + build + test）、`.gitattributes`（LF 归一）、完整 `.gitignore`；`package.json` 增加 `engines`（node ≥ 18）、`packageManager`（pnpm@11.7.0）；
 - README 重写：项目优势（与 dshmarket / 官方内置能力对比表）、三种安装方式（npm / GitHub / 本地）、安装后验证步骤、仓库运行必需内容清单。
 

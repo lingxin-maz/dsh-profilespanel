@@ -12,7 +12,7 @@ coverage/
 # panel undo / audit stores if ever created in the repo root
 .dsh-profile-panel/
 
-# e2e verification fixture home (documented in VERIFICATION.md)
+# e2e verification fixture home (regenerated per README dev notes)
 .e2e/
 
 # test temp dirs

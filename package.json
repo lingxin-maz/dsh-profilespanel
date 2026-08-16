@@ -2,6 +2,14 @@
   "name": "dsh-profile-panel",
   "description": "DeepSeek Harness plugin status panel / profile ops console: current profile, bundle state, pending-restart detection (SSE), one-click restart, multi-profile sync install with dual-end (web+desktop) mode, supply-chain version preview, rollback/undo, update detection & align, health checks, profile diff, boot report, audit log, and agent tools. · DSH 插件状态面板 / profile 运维控制台：观察、诊断、变更管理与 Agent 化。",
   "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lingxin-maz/dsh-profilespanel.git"
+  },
+  "bugs": {
+    "url": "https://github.com/lingxin-maz/dsh-profilespanel/issues"
+  },
+  "homepage": "https://github.com/lingxin-maz/dsh-profilespanel",
   "type": "module",
   "engines": {
     "node": ">=18"

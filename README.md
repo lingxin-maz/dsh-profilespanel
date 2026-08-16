@@ -1,10 +1,44 @@
-# dsh-profilespanel · DeepSeek Harness 插件状态面板 / profile 运维控制台
+# dsh-plugins · DeepSeek Harness 插件集合
 
-> 仓库名 `dsh-profilespanel` · npm 包名 `dsh-profile-panel`
+> 仓库名 `dsh-profilespanel` · 本仓库采用 **dsh-plugins 格式**：每个插件一个独立目录、根 README 提供安装指引（当前含 1 个插件）。
 >
-> DSH 插件状态面板：观察、诊断、变更管理与 Agent 化——当前 profile、bundle 状态、待重启检测（SSE）、一键重启、多 profile 同步安装（含双端模式）、供应链版本预览、回滚/撤销、更新检测与对齐、健康检查、profile 对比、启动报告、审计日志、市场对接与 Agent 工具。
+> 插件：**dsh-profile-panel** — DSH 插件状态面板 / profile 运维控制台：观察、诊断、变更管理与 Agent 化——当前 profile、bundle 状态、待重启检测（SSE）、一键重启、多 profile 同步安装（含双端模式）、供应链版本预览、回滚/撤销、更新检测与对齐、健康检查、profile 对比、启动报告、审计日志、市场对接与 Agent 工具。
 
 ---
+
+## 插件列表
+
+| 插件 | npm 包名 | 说明 | 安装命令 |
+|---|---|---|---|
+| [dsh-profile-panel](#dsh-profile-panel--插件状态面板--profile-运维控制台) | `dsh-profile-panel` | 插件状态面板 / profile 运维控制台 | `dsh plugin --profile <name> add dsh-profile-panel` |
+
+> 每个插件均为独立包（自带 `package.json` / `cordis.patch.yml` / `src` / `lib` / `client` / `tests`），可单独安装，也可通过下方 GitHub 直装整仓获取。
+
+---
+
+## 仓库结构
+
+| 路径 | 作用 |
+|---|---|
+| `package.json` | 插件包定义（`main` → `lib/index.js`；`dsh` 字段声明 bundle patch 与客户端注入） |
+| `cordis.patch.yml` | bundle 层栈插入声明（`dsh.bundle.patch`） |
+| `src/` | TypeScript 源码（宿主端 + `src/client/` 客户端） |
+| `lib/` | 编译后的宿主端代码 + 类型声明（`package.json` 的 `main` 指向 `lib/index.js`） |
+| `client/` | 编译后的客户端 bundle（`exports["./client"]`，设置页面板 UI） |
+| `tests/` | 宿主单测（`tests/host/`）+ 客户端组件测试（`tests/client/`） |
+| `scripts/` | 构建辅助脚本（`normalize-client-banner.mjs`） |
+| `tsconfig*.json` / `tsdown.config.ts` / `vitest*.config.ts` | 类型检查、构建与测试配置 |
+| `.github/workflows/ci.yml` | push/PR 自动 typecheck + build + test |
+
+构建产物（`lib/` + `client/`）随仓库提交：`github:` 直装无需在消费端构建，装完即可运行（`prepare` 脚本保留作刷新路径）。
+
+---
+
+# dsh-profile-panel · 插件状态面板 / profile 运维控制台
+
+> npm 包名 `dsh-profile-panel`
+>
+> DSH 插件状态面板：观察、诊断、变更管理与 Agent 化——当前 profile、bundle 状态、待重启检测（SSE）、一键重启、多 profile 同步安装（含双端模式）、供应链版本预览、回滚/撤销、更新检测与对齐、健康检查、profile 对比、启动报告、审计日志、市场对接与 Agent 工具。
 
 ## 项目优势 / Why this plugin
 
@@ -74,7 +108,7 @@ dsh plugin --profile <name> add dsh-profile-panel@1.0.0
 本仓库**已包含构建产物**（`lib/` + `client/`），`github:` 安装无需在消费端构建，装完即可运行：
 
 ```sh
-dsh plugin --profile <name> add github:<owner>/dsh-profilespanel
+dsh plugin --profile <name> add github:lingxin-maz/dsh-profilespanel
 ```
 
 ### 方式三：本地路径（开发 / 联调）
@@ -88,15 +122,6 @@ dsh plugin --profile desktop add ../dsh-profilespanel
 1. 重启 DSH（或等待面板提示）使 bundle 进入运行组合；
 2. 打开 **设置 → Profile / 插件**（settings 面板的 `profile-panel` 分区）即见完整面板；
 3. 验证：`GET http://127.0.0.1:<port>/api/profile-panel/status` 返回 200 即安装成功。
-
-### 仓库内容（运行时必需）
-
-| 路径 | 作用 |
-|---|---|
-| `lib/` | 编译后的宿主端代码（`package.json` 的 `main` 指向 `lib/index.js`） |
-| `client/` | 编译后的客户端 bundle（`exports["./client"]`，设置页面板 UI） |
-| `cordis.patch.yml` | bundle 层栈插入声明（`dsh.bundle.patch`） |
-| `src/` | TypeScript 源码（含类型声明入口 `src/index.ts`） |
 
 ---
 
